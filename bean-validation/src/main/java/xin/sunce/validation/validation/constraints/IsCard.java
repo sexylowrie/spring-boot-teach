@@ -19,6 +19,8 @@ import java.lang.annotation.*;
 public @interface IsCard {
     String message() default "{xin.sunce.teach.validation.constraints.IsCard.message}";
 
+    String[] expect() default {"utf-8","UTF-8"};
+
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};

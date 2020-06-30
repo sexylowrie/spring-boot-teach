@@ -15,13 +15,30 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class IsCardConstraintValidator implements ConstraintValidator<IsCard, String> {
 
+    private String[] expects;
+
+    Class[] groups;
+
+    public interface Card {
+    }
+
+    public interface No {
+    }
+
     @Override
     public boolean isValid(String cardNo, ConstraintValidatorContext constraintValidatorContext) {
-        return cardNo.startsWith("62");
+        for (String expect : expects) {
+            if (expect.equals(cardNo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void initialize(IsCard constraintAnnotation) {
-
+        this.expects = constraintAnnotation.expect();
+        this.groups = constraintAnnotation.groups();
+        System.out.println(constraintAnnotation);
     }
 }
